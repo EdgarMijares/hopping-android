@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.luiseduardovelaruiz.hopping">
+    package="com.luiseduardovelaruiz.hopping">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,9 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -36,7 +33,7 @@
         </activity>
 
         <!-- Log In Activity -->
-        <activity android:name=".LogInActivity"></activity>
+        <activity android:name=".LogInActivity" />
 
         <!-- Splash Activity -->
         <activity
@@ -48,7 +45,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".MenuActivity" />
+        <activity android:name=".PlaceProfileActivity"></activity>
     </application>
 
 </manifest>

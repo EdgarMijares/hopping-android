@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.luiseduardovelaruiz.hopping.LogInActivity">
+    tools:context="com.example.luiseduardovelaruiz.hopping.com.luiseduardovelaruiz.hopping.LogInActivity">
 
 
     <VideoView
@@ -24,6 +24,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+
         app:layout_constraintBottom_toBottomOf="@+id/videoBackgroundView"
         app:layout_constraintEnd_toEndOf="@+id/videoBackgroundView"
         app:layout_constraintStart_toStartOf="@+id/videoBackgroundView"

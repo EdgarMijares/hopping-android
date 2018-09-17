@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/black"
-    tools:context="com.example.luiseduardovelaruiz.hopping.MenuActivity">
+    android:id="@+id/mainActivityLayout"
+    tools:context=".MenuActivity">
 
+    <!-- Hopping Logo -->
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="130dp"
+        android:id="@+id/hoppingLogoImageView"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginLeft="32dp"
@@ -20,15 +22,15 @@
         android:cropToPadding="false"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_hopping" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/myViewPager"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
@@ -37,21 +39,48 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/hoppingLogoImageView"
+        app:layout_constraintVertical_bias="1.0" />
 
+    <!-- Side Menu Button -->
     <Button
-        android:id="@+id/button2"
-        android:layout_width="50dp"
-        android:layout_height="37dp"
+        android:id="@+id/menuButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:text="Button"
+        android:background="@drawable/menu_bars_button"
         app:layout_constraintBottom_toTopOf="@+id/myViewPager"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintEnd_toStartOf="@+id/hoppingLogoImageView"
+        app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39" />
+
+    <!-- Search Button -->
+    <Button
+        android:id="@+id/searchButton"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/search_button"
+        app:layout_constraintBottom_toTopOf="@+id/myViewPager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toEndOf="@+id/hoppingLogoImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.09" />
 
 </android.support.constraint.ConstraintLayout>
