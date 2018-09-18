@@ -65,7 +65,7 @@ class MainMenu : Fragment() {
         var indent = false
         var places = placesCount
         var rows = ArrayList<LinearLayout>()
-        var percentageWidth = (rootConstraintLayout.width * 0.5).toInt()
+        var percentageWidth = (rootConstraintLayout.width * 0.55).toInt()
         var params = LinearLayout.LayoutParams(percentageWidth, LinearLayout.LayoutParams.WRAP_CONTENT)
         var index = 0
 
@@ -120,18 +120,21 @@ class MainMenu : Fragment() {
             constraintSet.connect(row.id, ConstraintSet.LEFT, rootConstraintLayout.id, ConstraintSet.LEFT)
             constraintSet.connect(row.id, ConstraintSet.RIGHT, rootConstraintLayout.id, ConstraintSet.RIGHT)
 
-            if (indent) {
-                constraintSet.setHorizontalBias(row.id, 0.75F)
-                indent = false
-            } else {
-                constraintSet.setHorizontalBias(row.id, 0.25F)
-                indent = true
+            if (width == 540 && height == 960){
+                if (indent) {
+                    constraintSet.setHorizontalBias(row.id, 0.60F)
+                    indent = false
+                } else {
+                    constraintSet.setHorizontalBias(row.id, 0.40F)
+                    indent = true
+                }
             }
 
             /*
              *  Button insertion
              */
             val buttonParams = LinearLayout.LayoutParams(0, row.layoutParams.width / 2, 1.0F)
+            buttonParams.leftMargin = 20
 
             if ((places - 2) > 0) {
                 for (i in 0..1) {

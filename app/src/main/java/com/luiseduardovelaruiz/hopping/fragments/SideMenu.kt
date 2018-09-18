@@ -61,7 +61,7 @@ class SideMenu : Fragment() {
         showPoliticsButton.onClick {
             val transaction = fragmentManager!!.beginTransaction()
             val politicsFragment = Politics()
-            transaction.add(R.id.mainActivityLayout,politicsFragment)
+            transaction.add(R.id.mainActivityLayout, politicsFragment)
             transaction.addToBackStack(null)
             sideMenuLayout.visibility = View.INVISIBLE
             transaction.commit()

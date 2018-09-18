@@ -6,22 +6,22 @@ import android.view.View
 import android.view.ViewGroup
 import com.luiseduardovelaruiz.hopping.R
 
-class HorizontalGalleryRecyclerViewAdapter: RecyclerView.Adapter<ViewHolder>() {
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-    }//end onBindViewHolder
-
+class PromosRecyclerViewAdapter: RecyclerView.Adapter<ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent?.context)
-        val cellForRow = inflater.inflate(R.layout.horizontal_gallery_cell, parent, false)
+        val cellForRow = inflater.inflate(R.layout.promos_cell, parent, false)
         return ViewHolder(cellForRow)
-    }//end onCreateViewHolder
+    }
 
     override fun getItemCount(): Int {
-        return 6
-    }//end getItemCount
+        return 7
+    }
 
-}//end HorizontalGalleryRecyclerViewAdapter
+    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    }
 
-class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+}//end PromosRecyclerViewAdapter
+
+class PromosViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
 }
