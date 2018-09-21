@@ -17,14 +17,14 @@
         app:layout_constraintGuide_percent="0.90" />
 
     <Button
-        android:id="@+id/menuButton"
+        android:id="@+id/place_profile_back_button"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:background="@drawable/menu_bars_button"
+        android:background="@drawable/back_button"
         app:layout_constraintBottom_toTopOf="@+id/activity_place_profile_top_guideline"
         app:layout_constraintEnd_toStartOf="@+id/hoppingLogoImageView"
         app:layout_constraintHorizontal_bias="0.25"
@@ -183,10 +183,12 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/activity_place_profile_horizontal_gallery"
-        android:layout_width="360dp"
+        android:layout_width="0dp"
         android:layout_height="100dp"
         android:orientation="horizontal"
-        tools:layout_editor_absoluteY="271dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="268dp" />
 
     <ImageButton
         android:id="@+id/imageButton2"

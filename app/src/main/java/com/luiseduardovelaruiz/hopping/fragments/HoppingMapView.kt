@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.MapView
-import com.google.android.gms.maps.MapsInitializer
-import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.CameraPosition
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 import com.luiseduardovelaruiz.hopping.R
 import kotlinx.android.synthetic.main.fragment_map.*
@@ -47,6 +47,11 @@ class HoppingMapView : Fragment() {
                 myGoogleMap = it
                 it.mapType = GoogleMap.MAP_TYPE_NORMAL
 
+                it.addMarker(MarkerOptions().position(LatLng(24.01605557263028,-104.69056874513626)).title("Marker Point").snippet("this is the marker point"))
+
+                var cam = CameraPosition.builder().target(LatLng(24.01605557263028,-104.69056874513626)).zoom(16F).bearing(0F).tilt(45F).build()
+
+                it.moveCamera(CameraUpdateFactory.newCameraPosition(cam))
 
             })
         }

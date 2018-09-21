@@ -44,17 +44,27 @@ class SideMenu : Fragment() {
                 AccessToken.getCurrentAccessToken()
         ) { `object`, response ->
             myFaceBookData = response.toString()
-
             var jsonObject = response.jsonObject
+
+            println("FACEBOOK DATA "+ myFaceBookData)
+
+            // GET FACEBOOK'S USER PROFILE IMAGE
             if (jsonObject.has("picture")) {
                 var profilePictureURL = jsonObject.getJSONObject("picture").getJSONObject("data").getString("url")
                 onUiThread {
                     Glide.with(this).load(profilePictureURL).into(profilePictureImageView)
                 }
             }
+
+            //GET FACEBOOK'S USER UNIQUE ID
+            if (jsonObject.has("id")) {
+                var id = jsonObject.getString("id")
+                println("FOUND ID : "+id)
+                toast(id)
+            }
         }
         val parameters = Bundle()
-        parameters.putString("fields", "id,name,link,picture.type(large)")
+        parameters.putString("fields", "id, name, link, picture.type(large)")
         request.parameters = parameters
         request.executeAsync()
 

@@ -130,6 +130,17 @@ class MainMenu : Fragment() {
                 }
             }
 
+            if (width == 1080 && height == 1920) {
+                println("indent apllied to case B : ("+width+"x"+height+")")
+                if (indent) {
+                    constraintSet.setHorizontalBias(row.id, 0.65F)
+                    indent = false
+                } else {
+                    constraintSet.setHorizontalBias(row.id, 0.35F)
+                    indent = true
+                }
+            }
+
             /*
              *  Button insertion
              */
@@ -142,6 +153,8 @@ class MainMenu : Fragment() {
                     val button = CircleImageView(activity?.baseContext)
                     val picURL = path+placesArray[index].profileimage
                     val backgroudPictureURL = path+placesArray[index].backgroundimage
+                    val placeID = placesArray[index].id_place
+
                     button.layoutParams = buttonParams
                     onUiThread {
                         Glide.with(activity!!.baseContext).load(picURL).into(button)
@@ -150,6 +163,8 @@ class MainMenu : Fragment() {
                         val profileIntent: Intent = Intent(activity, PlaceProfileActivity::class.java)
                         profileIntent.putExtra(PROFILE_BACKGROUND_PICTURE_KEY, backgroudPictureURL)
                         profileIntent.putExtra(PROFILE_PICTURE_KEY, picURL)
+                        profileIntent.putExtra(PID, placeID)
+
                         startActivity(profileIntent)
                     }
                     index++
@@ -157,10 +172,13 @@ class MainMenu : Fragment() {
                 }//end for
                 places -= 2
             } else {
-                val button = CircleImageView(activity?.baseContext)
                 val picURL = "https://hoppingapp.com/profile-images/"+placesArray[index].profileimage
-                button.layoutParams = buttonParams
                 val backgroudPictureURL = path+placesArray[index].backgroundimage
+                val placeID = placesArray[index].id_place
+
+                val button = CircleImageView(activity?.baseContext)
+
+                button.layoutParams = buttonParams
                 onUiThread {
                     Glide.with(activity!!.baseContext).load(picURL).into(button)
                 }
@@ -168,6 +186,7 @@ class MainMenu : Fragment() {
                     val profileIntent: Intent = Intent(activity, PlaceProfileActivity::class.java)
                     profileIntent.putExtra(PROFILE_BACKGROUND_PICTURE_KEY, backgroudPictureURL)
                     profileIntent.putExtra(PROFILE_PICTURE_KEY, picURL)
+                    profileIntent.putExtra(PID, placeID)
                     startActivity(profileIntent)
                 }
                 row.addView(button)
@@ -192,6 +211,7 @@ class MainMenu : Fragment() {
     companion object {
         val PROFILE_BACKGROUND_PICTURE_KEY = "place-background-image"
         val PROFILE_PICTURE_KEY = "place-image"
+        val PID = "place-id"
     }
 
 }//end MainMenu

@@ -85,13 +85,9 @@
         app:layout_constraintGuide_percent="0.90" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/activity_menu_camera_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginStart="0dp"
         android:background="@drawable/camara_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
