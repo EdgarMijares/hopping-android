@@ -3,7 +3,7 @@ package com.luiseduardovelaruiz.hopping.logic
 class Place(
         val placename: String,
         val profileimage: String,
-        val id_place: Int,
+        val id_place: String,
         val latitude: String,
         val longitude: String,
         val description: String,

@@ -11,13 +11,21 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.content.LocalBroadcastManager
 import android.view.ViewTreeObserver
+import com.bumptech.glide.Glide
+import com.facebook.AccessToken
+import com.facebook.GraphRequest
 import com.luiseduardovelaruiz.hopping.fragments.MainMenu
 import com.luiseduardovelaruiz.hopping.fragments.MediaFeed
 import com.luiseduardovelaruiz.hopping.fragments.SideMenu
+import com.luiseduardovelaruiz.hopping.fragments.facebookUserID
 import com.luiseduardovelaruiz.hopping.logic.PagerAdapter
 import kotlinx.android.synthetic.main.activity_menu.*
+import kotlinx.android.synthetic.main.fragment_side_menu.*
 import okhttp3.*
+import org.jetbrains.anko.custom.onUiThread
 import org.jetbrains.anko.sdk25.coroutines.onClick
+import org.jetbrains.anko.support.v4.onUiThread
+import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.toast
 import java.io.IOException
 
@@ -30,6 +38,27 @@ class MenuActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+
+        val request = GraphRequest.newMeRequest(
+                AccessToken.getCurrentAccessToken()
+        ) { `object`, response ->
+            myFaceBookData = response.toString()
+            var jsonObject = response.jsonObject
+
+            println("FACEBOOK DATA "+ myFaceBookData)
+
+            //GET FACEBOOK'S USER UNIQUE ID
+            if (jsonObject.has("id")) {
+                var id = jsonObject.getString("id")
+                facebookUserID = id
+                toast(id)
+            }
+        }
+
+        val parameters = Bundle()
+        parameters.putString("fields", "id, name, link, picture.type(large)")
+        request.parameters = parameters
+        request.executeAsync()
 
         pagerAdapter = PagerAdapter(myFragmentManager)
         pagerAdapter!!.addFragmentsToAdapter(MainMenu(),"Main Menu Fragment")

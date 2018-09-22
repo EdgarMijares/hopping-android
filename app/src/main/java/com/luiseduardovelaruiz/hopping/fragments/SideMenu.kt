@@ -1,11 +1,8 @@
 package com.luiseduardovelaruiz.hopping.fragments
 
-
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,15 +18,15 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
 
 import com.facebook.login.LoginManager
-import com.facebook.GraphResponse
-import com.google.gson.GsonBuilder
 import org.jetbrains.anko.support.v4.onUiThread
-import org.json.JSONObject
 
 /**
  * A simple [Fragment] subclass.
  *
  */
+
+var facebookUserID: String = ""
+
 class SideMenu : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -59,7 +56,7 @@ class SideMenu : Fragment() {
             //GET FACEBOOK'S USER UNIQUE ID
             if (jsonObject.has("id")) {
                 var id = jsonObject.getString("id")
-                println("FOUND ID : "+id)
+                facebookUserID = id
                 toast(id)
             }
         }

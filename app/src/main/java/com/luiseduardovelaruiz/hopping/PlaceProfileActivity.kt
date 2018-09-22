@@ -20,7 +20,7 @@ import org.jetbrains.anko.toast
 
 class PlaceProfileActivity : AppCompatActivity() {
 
-    private var PID = 0
+    private var PID = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +34,7 @@ class PlaceProfileActivity : AppCompatActivity() {
         activity_place_profile_horizontal_gallery.layoutManager = LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL, false)
         activity_place_profile_horizontal_gallery.adapter = HorizontalGalleryRecyclerViewAdapter()
 
-        PID = intent.getIntExtra(MainMenu.PID,-1)
+        PID = intent.getStringExtra(MainMenu.PID)
 
 
         /*
@@ -88,7 +88,7 @@ class PlaceProfileActivity : AppCompatActivity() {
 
         place_profile_reserv_button.onClick {
             val bundle = Bundle()
-            bundle.putInt(MainMenu.PID, PID)
+            bundle.putString(MainMenu.PID, PID)
             val transaction = fragmentManager.beginTransaction()
             val reserveFragment = Reservations()
             reserveFragment.arguments = bundle

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "575574559197",
+    "firebase_url": "https://hopping-dc414.firebaseio.com",
+    "project_id": "hopping-dc414",
+    "storage_bucket": "hopping-dc414.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575574559197:android:9b8b4ee36b067abf",
+        "android_client_info": {
+          "package_name": "com.luiseduardovelaruiz.hopping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575574559197-i7il2vsncfockq8uilhkbpkvo80oghv7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.luiseduardovelaruiz.hopping",
+            "certificate_hash": "219333b387676be2631c78f15fc69362f2411362"
+          }
+        },
+        {
+          "client_id": "575574559197-9suc9qvojb1oq15dl3d27c2pjqdb1iqn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBW--HTZX474srZA5J9LXdgCTJFzYzM2gQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575574559197-9suc9qvojb1oq15dl3d27c2pjqdb1iqn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
