@@ -1,16 +1,20 @@
 package com.luiseduardovelaruiz.hopping
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri.parse
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_login.*
 import android.media.MediaPlayer.OnPreparedListener
+import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import com.luiseduardovelaruiz.hopping.R
 import com.facebook.*
 import com.facebook.login.LoginResult
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 var myFaceBookData: String = ""
 
@@ -22,6 +26,23 @@ class LogInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme_SplashTheme)
         setContentView(R.layout.activity_login)
+
+
+        try {
+            val info = packageManager.getPackageInfo(
+                    "com.luiseduardovelaruiz.hopping",
+                    PackageManager.GET_SIGNATURES)
+            for (signature in info.signatures) {
+                val md = MessageDigest.getInstance("SHA")
+                md.update(signature.toByteArray())
+                Log.e("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT))
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+
+        } catch (e: NoSuchAlgorithmException) {
+
+        }
+
 
         var menuIntent: Intent = Intent(this@LogInActivity, MenuActivity::class.java)
 
