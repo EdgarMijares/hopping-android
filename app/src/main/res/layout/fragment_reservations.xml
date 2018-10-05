@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorClear"
+    android:visibility="visible"
     tools:context=".fragments.Reservations">
 
+
+    <ProgressBar
+        android:id="@+id/progressBar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.Guideline
         android:id="@+id/reservations_top_guideline"
@@ -24,6 +34,7 @@
         app:layout_constraintGuide_percent=".90" />
 
     <LinearLayout
+        android:id="@+id/reservations_panel"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="40dp"
@@ -32,7 +43,9 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_corners_pink_shape"
+        android:gravity="center"
         android:orientation="vertical"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/reservations_bottom_guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -53,39 +66,39 @@
             android:id="@+id/nombre_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:text="Nombre:" />
+            android:text="Nombre:"
+            android:textColor="@color/colorWhite" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/editText_reservation_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
             android:ems="10"
+            android:hint="Nombre"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:textColor="@color/colorWhite" />
 
         <TextView
             android:id="@+id/textView9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
-            android:text="Cantidad de personas:" />
+            android:text="Cantidad de personas:"
+            android:textColor="@color/colorWhite" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/editText_reservation_number_of_people"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorWhite"
             android:ems="10"
+            android:hint="0"
             android:inputType="textPersonName"
-            android:text="Name" />
+            android:textColor="@color/colorWhite" />
 
         <Button
             android:id="@+id/reservation_button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Listo" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

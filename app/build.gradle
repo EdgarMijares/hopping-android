@@ -61,6 +61,10 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-core:16.0.1'
     implementation 'com.google.firebase:firebase-database:16.0.1'
+
+    implementation 'com.android.support:gridlayout-v7:26.1.0'
+    implementation 'com.pushwoosh:pushwoosh:5.9.0'
+    implementation 'com.android.support:support-compat:26.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

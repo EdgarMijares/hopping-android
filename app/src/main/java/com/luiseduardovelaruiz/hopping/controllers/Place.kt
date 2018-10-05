@@ -1,4 +1,4 @@
-package com.luiseduardovelaruiz.hopping.logic
+package com.luiseduardovelaruiz.hopping.controllers
 
 class Place(
         val placename: String,

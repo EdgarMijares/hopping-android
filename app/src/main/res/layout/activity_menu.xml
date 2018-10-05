@@ -10,7 +10,7 @@
 
     <!-- Hopping Logo -->
     <ImageView
-        android:id="@+id/hoppingLogoImageView"
+        android:id="@+id/mainMenu_hoppingLogoImageView"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hoppingLogoImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/mainMenu_hoppingLogoImageView" />
 
     <!-- Side Menu Button -->
     <Button
@@ -47,7 +47,7 @@
         android:layout_marginStart="8dp"
         android:background="@drawable/menu_bars_button"
         app:layout_constraintBottom_toTopOf="@+id/myViewPager"
-        app:layout_constraintEnd_toStartOf="@+id/hoppingLogoImageView"
+        app:layout_constraintEnd_toStartOf="@+id/mainMenu_hoppingLogoImageView"
         app:layout_constraintHorizontal_bias="0.25"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -66,7 +66,7 @@
         app:layout_constraintBottom_toTopOf="@+id/myViewPager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.75"
-        app:layout_constraintStart_toEndOf="@+id/hoppingLogoImageView"
+        app:layout_constraintStart_toEndOf="@+id/mainMenu_hoppingLogoImageView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.38" />
 

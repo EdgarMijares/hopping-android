@@ -1,7 +1,9 @@
 package com.luiseduardovelaruiz.hopping
 
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.hardware.camera2.CameraAccessException
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
@@ -14,6 +16,7 @@ import android.view.ViewTreeObserver
 import com.bumptech.glide.Glide
 import com.facebook.AccessToken
 import com.facebook.GraphRequest
+import com.google.firebase.iid.FirebaseInstanceId
 import com.luiseduardovelaruiz.hopping.fragments.MainMenu
 import com.luiseduardovelaruiz.hopping.fragments.MediaFeed
 import com.luiseduardovelaruiz.hopping.fragments.SideMenu
@@ -32,8 +35,34 @@ import java.io.IOException
 class MenuActivity : AppCompatActivity() {
 
     var pagerAdapter: PagerAdapter? = null
+    var buttonState: Int = 0
 
     val myFragmentManager = supportFragmentManager
+
+    val buttonIconChangeReceiver = object: BroadcastReceiver() {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+
+            var state = p1?.getIntExtra(SideMenu.MENU_BUTTON_STATUS, -1)
+
+            when (state) {
+                1 -> {
+                    buttonState = 1
+                    menuButton.setBackgroundResource(R.drawable.back_button)
+                    menuButton.onClick {
+                        LocalBroadcastManager.getInstance(this@MenuActivity).sendBroadcast(Intent("back_action"))
+                    }
+                }
+                0 -> {
+                    buttonState = 0
+                    menuButton.setBackgroundResource(R.drawable.menu_bars_button)
+                    menuButton.onClick {
+                        menuButtonAction()
+                    }
+                }
+            }//end when
+
+        }//end onReceive
+    }//end buttonIconChangeReceiver
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,8 +90,8 @@ class MenuActivity : AppCompatActivity() {
         request.executeAsync()
 
         pagerAdapter = PagerAdapter(myFragmentManager)
-        pagerAdapter!!.addFragmentsToAdapter(MainMenu(),"Main Menu Fragment")
-        pagerAdapter!!.addFragmentsToAdapter(MediaFeed(),"Media Feed Fragment")
+        pagerAdapter!!.addFragmentsToAdapter(MainMenu())
+        pagerAdapter!!.addFragmentsToAdapter(MediaFeed())
 
         myViewPager.adapter = pagerAdapter
 
@@ -100,12 +129,17 @@ class MenuActivity : AppCompatActivity() {
         }//end onClick ...camera_button
 
         fetchData()
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(buttonIconChangeReceiver, IntentFilter("menu_button_icon_change"))
+
+
+        //FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(object: OnCompleteLis)
     }//end onCreate
 
     fun menuButtonAction(){
         val transaction = myFragmentManager.beginTransaction()
         val sideMenuFragment = SideMenu()
-        transaction.add(R.id.mainActivityLayout,sideMenuFragment)
+        transaction.add(R.id.mainActivityLayout, sideMenuFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }//end menuButtonAction
@@ -129,7 +163,15 @@ class MenuActivity : AppCompatActivity() {
                 LocalBroadcastManager.getInstance(this@MenuActivity).sendBroadcast(intent)
             }//end onResponse
         })
-
     }//end fetchData
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+        if (buttonState == 1) {
+            buttonState = 0
+            menuButton.setBackgroundResource(R.drawable.menu_bars_button)
+        }
+    }
 
 }//end class MenuActivity

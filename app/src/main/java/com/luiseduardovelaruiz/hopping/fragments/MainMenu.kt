@@ -21,12 +21,14 @@ import com.google.gson.GsonBuilder
 import com.luiseduardovelaruiz.hopping.PlaceProfileActivity
 
 import com.luiseduardovelaruiz.hopping.R
-import com.luiseduardovelaruiz.hopping.logic.Place
+import com.luiseduardovelaruiz.hopping.controllers.Place
 import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.fragment_main_menu.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.onUiThread
+
+var placesArrayG: ArrayList<Place> = ArrayList()
 
 /**
  *
@@ -42,6 +44,7 @@ class MainMenu : Fragment() {
             val gson = GsonBuilder().create()
             val body = p1?.getStringExtra("dataBody")
             placesArray = gson.fromJson(body, Array<Place>::class.java).toList()
+            placesArrayG = placesArray as ArrayList<Place>
             displayMenu(placesArray.size)
         }
     }//end myReceiver
@@ -78,7 +81,6 @@ class MainMenu : Fragment() {
         println("this device resolution is w["+width+"] x h["+height+"]")
 
         if (places > 0){
-
             while (places != 0) {
                 var row = LinearLayout(activity?.baseContext)
                 if ((places - 2) > 0) {
@@ -106,7 +108,6 @@ class MainMenu : Fragment() {
             if (rows.first() == row) {
                 if (width == 540 && height == 960){
                     constraintSet.connect(row.id, ConstraintSet.TOP, rootConstraintLayout.id, ConstraintSet.TOP,40)
-                    println("CASE 1")
                 }
                 if (width == 1080 && height == 1920) {
                     constraintSet.connect(row.id, ConstraintSet.TOP, rootConstraintLayout.id, ConstraintSet.TOP,80)

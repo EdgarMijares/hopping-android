@@ -49,13 +49,13 @@
                 android:src="@drawable/generic_user_icon_android" />
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/myReserves"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
-                android:textColor="@color/colorWhite"
                 android:background="@color/colorClear"
-                android:text="MIS RESERVACIONES" />
+                android:text="MIS RESERVACIONES"
+                android:textColor="@color/colorWhite" />
 
             <!-- Politics Button -->
             <Button

@@ -1,8 +1,12 @@
 package com.luiseduardovelaruiz.hopping.fragments
 
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.LocalBroadcastManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +22,8 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
 
 import com.facebook.login.LoginManager
+import kotlinx.android.synthetic.main.activity_menu.*
+import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.support.v4.onUiThread
 
 /**
@@ -28,6 +34,16 @@ import org.jetbrains.anko.support.v4.onUiThread
 var facebookUserID: String = ""
 
 class SideMenu : Fragment() {
+
+    val backReceiver = object : BroadcastReceiver() {
+        override fun onReceive(p0: Context?, p1: Intent?) {
+            var intent = Intent("menu_button_icon_change")
+            intent.putExtra(MENU_BUTTON_STATUS, 0)
+            var broadcastManager = LocalBroadcastManager.getInstance(activity!!.baseContext)
+            broadcastManager.sendBroadcast(intent)
+            fragmentManager?.popBackStack()
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -65,7 +81,26 @@ class SideMenu : Fragment() {
         request.parameters = parameters
         request.executeAsync()
 
+        myReserves.onClick {
+            // Notify the change of icon on the menu button (bars for back arrow)
+            var intent = Intent("menu_button_icon_change")
+            intent.putExtra(MENU_BUTTON_STATUS, 1)
+            LocalBroadcastManager.getInstance(activity!!.baseContext).sendBroadcast(intent)
+
+            val transaction = fragmentManager!!.beginTransaction()
+            val politicsFragment = MyReserves()
+            transaction.add(R.id.mainActivityLayout, politicsFragment)
+            transaction.addToBackStack(null)
+            sideMenuLayout.visibility = View.INVISIBLE
+            transaction.commit()
+        }
+
         showPoliticsButton.onClick {
+            // Notify the change of icon on the menu button (bars for back arrow)
+            var intent = Intent("menu_button_icon_change")
+            intent.putExtra(MENU_BUTTON_STATUS, 1)
+            LocalBroadcastManager.getInstance(activity!!.baseContext).sendBroadcast(intent)
+
             val transaction = fragmentManager!!.beginTransaction()
             val politicsFragment = Politics()
             transaction.add(R.id.mainActivityLayout, politicsFragment)
@@ -81,6 +116,11 @@ class SideMenu : Fragment() {
             activity!!.finish()
         }
 
+        LocalBroadcastManager.getInstance(activity!!.baseContext).registerReceiver(backReceiver, IntentFilter("back_action"))
     }//end onViewCreated
+
+    companion object {
+        val MENU_BUTTON_STATUS = "menu_button_status"
+    }
 
 }//end SideMenu Fragment

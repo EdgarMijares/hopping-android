@@ -1,10 +1,11 @@
-package com.luiseduardovelaruiz.hopping.logic
+package com.luiseduardovelaruiz.hopping.adapters
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.view.ViewGroup
 
-class PagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
+class HorizontalGalleryFullScreenPagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
 
     var myFragmentItems: ArrayList<Fragment> = ArrayList()
 
@@ -16,8 +17,8 @@ class PagerAdapter(fm: FragmentManager?) : FragmentPagerAdapter(fm) {
         return myFragmentItems.size
     }
 
-    fun addFragmentsToAdapter(fragmentItem: Fragment) {
+    fun addFragments(fragmentItem: Fragment){
         myFragmentItems.add(fragmentItem)
     }
 
-}//end class PagerAdapter
+}//end HorizontalGalleryFullScreenPagerAdapter

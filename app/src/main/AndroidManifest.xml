@@ -19,7 +19,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -43,7 +42,9 @@
         </activity>
 
         <!-- Log In Activity -->
-        <activity android:name=".LogInActivity" />
+        <activity
+            android:name=".LogInActivity"
+            android:screenOrientation="portrait"/>
 
         <!-- Splash Activity -->
         <activity
@@ -55,8 +56,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MenuActivity" />
-        <activity android:name=".PlaceProfileActivity" />
+
+        <!-- Menu activity (includes feed) -->
+        <activity
+            android:name=".MenuActivity"
+            android:screenOrientation="portrait"/>
+
+        <!-- Place profile activity -->
+        <activity
+            android:name=".PlaceProfileActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"/>
 
         <!-- Android Maps Key -->
         <meta-data
@@ -70,7 +80,8 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <activity android:name=".Camera"></activity>
-    </application>
+        <activity android:name=".Camera" />
+        <activity android:name=".FullScreenGallery"></activity>
 
+    </application>
 </manifest>
