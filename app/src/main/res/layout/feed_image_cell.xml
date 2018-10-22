@@ -21,13 +21,12 @@
             android:id="@+id/placeNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@id/feed_image"
             android:layout_alignBottom="@id/uploadTimeTextView"
-            android:layout_marginRight="20px"
+            android:layout_alignRight="@id/feed_image"
             android:layout_marginBottom="40px"
+            android:layout_marginRight="20px"
             android:textColor="@color/colorWhite"
-            android:textStyle="bold"
-            android:text="el bar la cosa nostra" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/uploadTimeTextView"
@@ -36,7 +35,6 @@
             android:layout_alignBottom="@id/feed_image"
             android:layout_alignRight="@id/feed_image"
             android:layout_marginRight="20px"
-            android:text="Hace 15 min"
             android:textColor="@color/colorWhite" />
 
 

@@ -53,13 +53,13 @@ class SideMenu : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        LocalBroadcastManager.getInstance(activity!!.baseContext).registerReceiver(backReceiver, IntentFilter("back_action"))
+
         val request = GraphRequest.newMeRequest(
                 AccessToken.getCurrentAccessToken()
         ) { `object`, response ->
             myFaceBookData = response.toString()
             var jsonObject = response.jsonObject
-
-            println("FACEBOOK DATA "+ myFaceBookData)
 
             // GET FACEBOOK'S USER PROFILE IMAGE
             if (jsonObject.has("picture")) {
@@ -73,7 +73,6 @@ class SideMenu : Fragment() {
             if (jsonObject.has("id")) {
                 var id = jsonObject.getString("id")
                 facebookUserID = id
-                toast(id)
             }
         }
         val parameters = Bundle()
@@ -116,7 +115,7 @@ class SideMenu : Fragment() {
             activity!!.finish()
         }
 
-        LocalBroadcastManager.getInstance(activity!!.baseContext).registerReceiver(backReceiver, IntentFilter("back_action"))
+
     }//end onViewCreated
 
     companion object {

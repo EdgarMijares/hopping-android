@@ -38,6 +38,7 @@ class MediaFeedRecyclerViewAdapter(var imagesArray: ArrayList<FeedImage>): Recyc
         var width = displayMetrics.widthPixels
         var height = displayMetrics.heightPixels
 
+        /*
         if (width == 540 && height == 960) {
             imageView?.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,Random().nextInt((400 + 1) - 300) +  300)
         }
@@ -45,9 +46,12 @@ class MediaFeedRecyclerViewAdapter(var imagesArray: ArrayList<FeedImage>): Recyc
         if (width == 1080 && height == 1920) {
             imageView?.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT,Random().nextInt((800 + 1) - 500) +  500)
         }
-
-        view?.placeNameTextView?.text = "Lugar"
+        */
+        imageView?.layoutParams = RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, 500)
+        view?.placeNameTextView?.text = ""
+        //var minutes = (System.currentTimeMillis() - imagesArray[position].uploadInterval) / 1000 / 60
         view?.uploadTimeTextView?.text = imagesArray[position].uploadTime
+
         Glide.with(view!!.context).load(imagesArray[position].imageURL).into(imageView!!)
 
         view?.setOnLongClickListener(object: View.OnLongClickListener {

@@ -1,6 +1,5 @@
 package com.luiseduardovelaruiz.hopping.fragments
 
-
 import android.os.Bundle
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager
@@ -13,15 +12,6 @@ import com.luiseduardovelaruiz.hopping.adapters.PromosRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_promos.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- *
- */
 class Promos : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -37,9 +27,11 @@ class Promos : Fragment() {
             fragmentManager.popBackStackImmediate()
         }
 
+        var promos = arguments.getStringArrayList(MainMenu.PROMOS)
+
         promos_recycler_view.layoutManager = LinearLayoutManager(activity.baseContext)
-        promos_recycler_view.adapter = PromosRecyclerViewAdapter()
+        promos_recycler_view.adapter = PromosRecyclerViewAdapter(promos)
 
     }
 
-}
+}//end class

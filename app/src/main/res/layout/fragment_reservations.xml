@@ -43,7 +43,6 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/rounded_corners_pink_shape"
-        android:gravity="center"
         android:orientation="vertical"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/reservations_bottom_guideline"
@@ -56,6 +55,7 @@
             android:id="@+id/reserva_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="50dp"
             android:text="Reserva"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
@@ -98,6 +98,8 @@
             android:id="@+id/reservation_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#791C22"
+            android:textColor="@color/colorWhite"
             android:text="Listo" />
     </LinearLayout>
 

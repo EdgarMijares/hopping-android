@@ -3,7 +3,8 @@
     <string name="facebook_app_id">1862235454045275</string>
     <string name="fb_login_protocol_scheme">fb1862235454045275</string>
     <string name="logo_hopping">logo hopping</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="api_url">https://www.hoppingapp.com/logic/app_connection.php</string>
+    <string name="api_images">https://hoppingapp.com/profile-images/</string>
+    <string name="hop_conf">https://my-hop.firebaseio.com/</string>
+    <string name="feed_url">https://feed-handler-place.firebaseio.com/</string>
 </resources>

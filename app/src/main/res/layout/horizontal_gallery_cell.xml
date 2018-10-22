@@ -9,9 +9,9 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:id="@+id/horizontal_gallery_cell_image"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:scaleType="centerCrop"
-        app:srcCompat="@drawable/uno" />
+        android:scaleType="centerCrop" />
 
 </FrameLayout>

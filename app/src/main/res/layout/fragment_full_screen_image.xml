@@ -8,10 +8,9 @@
     tools:context=".fragments.FullScreenImage">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageView_fullscreeniamge"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/uno"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

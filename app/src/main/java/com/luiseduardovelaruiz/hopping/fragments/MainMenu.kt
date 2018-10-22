@@ -27,6 +27,8 @@ import kotlinx.android.synthetic.main.fragment_main_menu.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.onUiThread
+import org.jetbrains.anko.support.v4.toast
+import java.util.*
 
 var placesArrayG: ArrayList<Place> = ArrayList()
 
@@ -38,7 +40,6 @@ class MainMenu : Fragment() {
     lateinit var rootConstraintLayout: ConstraintLayout
     lateinit var placesArray: List<Place>
 
-    val path = "https://hoppingapp.com/profile-images/"
     val myReceiver = object : BroadcastReceiver(){
         override fun onReceive(p0: Context?, p1: Intent?) {
             val gson = GsonBuilder().create()
@@ -78,12 +79,10 @@ class MainMenu : Fragment() {
         var width = displayMetrics.widthPixels
         var height = displayMetrics.heightPixels
 
-        println("this device resolution is w["+width+"] x h["+height+"]")
-
         if (places > 0){
             while (places != 0) {
                 var row = LinearLayout(activity?.baseContext)
-                if ((places - 2) > 0) {
+                if ((places - 2) >= 0) {
                     rows.add(row)
                     places -= 2
                 } else {
@@ -106,13 +105,11 @@ class MainMenu : Fragment() {
         for (row in rows) {
 
             if (rows.first() == row) {
-                if (width == 540 && height == 960){
+                if (width == 540 && height == 960) {
                     constraintSet.connect(row.id, ConstraintSet.TOP, rootConstraintLayout.id, ConstraintSet.TOP,40)
                 }
                 if (width == 1080 && height == 1920) {
                     constraintSet.connect(row.id, ConstraintSet.TOP, rootConstraintLayout.id, ConstraintSet.TOP,80)
-                } else {
-                    //constraintSet.connect(row.id, ConstraintSet.TOP, rootConstraintLayout.id, ConstraintSet.TOP,80)
                 }
             } else {
                 constraintSet.connect(row.id, ConstraintSet.TOP, previusRow.id, ConstraintSet.BOTTOM,5)
@@ -121,25 +118,12 @@ class MainMenu : Fragment() {
             constraintSet.connect(row.id, ConstraintSet.LEFT, rootConstraintLayout.id, ConstraintSet.LEFT)
             constraintSet.connect(row.id, ConstraintSet.RIGHT, rootConstraintLayout.id, ConstraintSet.RIGHT)
 
-            if (width == 540 && height == 960){
-                if (indent) {
-                    constraintSet.setHorizontalBias(row.id, 0.60F)
-                    indent = false
-                } else {
-                    constraintSet.setHorizontalBias(row.id, 0.40F)
-                    indent = true
-                }
-            }
-
-            if (width == 1080 && height == 1920) {
-                println("indent apllied to case B : ("+width+"x"+height+")")
-                if (indent) {
-                    constraintSet.setHorizontalBias(row.id, 0.65F)
-                    indent = false
-                } else {
-                    constraintSet.setHorizontalBias(row.id, 0.35F)
-                    indent = true
-                }
+            if (indent) {
+                constraintSet.setHorizontalBias(row.id, 0.60F)
+                indent = false
+            } else {
+                constraintSet.setHorizontalBias(row.id, 0.40F)
+                indent = true
             }
 
             /*
@@ -148,13 +132,17 @@ class MainMenu : Fragment() {
             val buttonParams = LinearLayout.LayoutParams(0, row.layoutParams.width / 2, 1.0F)
             buttonParams.leftMargin = 20
 
-            if ((places - 2) > 0) {
+            if ((places - 2) >= 0) {
                 for (i in 0..1) {
                     //val button = ImageView(activity?.baseContext)
                     val button = CircleImageView(activity?.baseContext)
-                    val picURL = path+placesArray[index].profileimage
-                    val backgroudPictureURL = path+placesArray[index].backgroundimage
+                    val picURL = resources.getString(R.string.api_images)+placesArray[index].profileimage
+                    val backgroudPictureURL = resources.getString(R.string.api_images)+placesArray[index].backgroundimage
                     val placeID = placesArray[index].id_place
+                    val placeName = placesArray[index].placename
+                    val placeDescription = placesArray[index].description
+                    val latitude = placesArray[index].latitude
+                    val longitude = placesArray[index].longitude
 
                     button.layoutParams = buttonParams
                     onUiThread {
@@ -165,7 +153,10 @@ class MainMenu : Fragment() {
                         profileIntent.putExtra(PROFILE_BACKGROUND_PICTURE_KEY, backgroudPictureURL)
                         profileIntent.putExtra(PROFILE_PICTURE_KEY, picURL)
                         profileIntent.putExtra(PID, placeID)
-
+                        profileIntent.putExtra(PLACE_NAME, placeName)
+                        profileIntent.putExtra(PLACE_DESCRIPTION, placeDescription)
+                        profileIntent.putExtra(LATITUDE, latitude)
+                        profileIntent.putExtra(LONGITUDE, longitude)
                         startActivity(profileIntent)
                     }
                     index++
@@ -173,9 +164,13 @@ class MainMenu : Fragment() {
                 }//end for
                 places -= 2
             } else {
-                val picURL = "https://hoppingapp.com/profile-images/"+placesArray[index].profileimage
-                val backgroudPictureURL = path+placesArray[index].backgroundimage
+                val picURL = resources.getString(R.string.api_images)+placesArray[index].profileimage
+                val backgroudPictureURL = resources.getString(R.string.api_images)+placesArray[index].backgroundimage
                 val placeID = placesArray[index].id_place
+                val placeName = placesArray[index].placename
+                val placeDescription = placesArray[index].description
+                val latitude = placesArray[index].latitude
+                val longitude = placesArray[index].longitude
 
                 val button = CircleImageView(activity?.baseContext)
 
@@ -188,6 +183,10 @@ class MainMenu : Fragment() {
                     profileIntent.putExtra(PROFILE_BACKGROUND_PICTURE_KEY, backgroudPictureURL)
                     profileIntent.putExtra(PROFILE_PICTURE_KEY, picURL)
                     profileIntent.putExtra(PID, placeID)
+                    profileIntent.putExtra(PLACE_NAME, placeName)
+                    profileIntent.putExtra(PLACE_DESCRIPTION, placeDescription)
+                    profileIntent.putExtra(LATITUDE, latitude)
+                    profileIntent.putExtra(LONGITUDE, longitude)
                     startActivity(profileIntent)
                 }
                 row.addView(button)
@@ -213,6 +212,11 @@ class MainMenu : Fragment() {
         val PROFILE_BACKGROUND_PICTURE_KEY = "place-background-image"
         val PROFILE_PICTURE_KEY = "place-image"
         val PID = "place-id"
+        val PROMOS = "promos"
+        val PLACE_NAME = "place-name"
+        val PLACE_DESCRIPTION = "place_description"
+        val LATITUDE = "latitude"
+        val LONGITUDE = "longitude"
     }
 
 }//end MainMenu

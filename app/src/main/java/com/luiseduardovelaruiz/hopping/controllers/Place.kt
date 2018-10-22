@@ -11,5 +11,6 @@ class Place(
         val address: String,
         val backgroundimage: String,
         val id_user: String,
-        val promos: Map<String, String>)
+        val promos: Map<String, String>,
+        val gallery: Map<String, String>)
 

@@ -17,7 +17,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 import com.luiseduardovelaruiz.hopping.R
-import com.luiseduardovelaruiz.hopping.logic.DateManager
 import com.luiseduardovelaruiz.hopping.logic.FeedImage
 import com.luiseduardovelaruiz.hopping.adapters.MediaFeedRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_media_feed.*
@@ -61,9 +60,6 @@ class MediaFeed : Fragment() {
             feedSwipeRefreshLayout.isRefreshing = false
         }
 
-
-        var id = UUID.randomUUID().toString()+"UT"
-        println("dates")
         LocalBroadcastManager.getInstance(activity!!.baseContext).registerReceiver(myPressedReceiver, IntentFilter("feed_image_pressed"))
         LocalBroadcastManager.getInstance(activity!!.baseContext).registerReceiver(myReleasedReceiver, IntentFilter("feed_image_released"))
     }//end onViewCreated
@@ -75,17 +71,20 @@ class MediaFeed : Fragment() {
 
     private fun configureRealtimeDatabase(){
         var imagesArray: ArrayList<FeedImage> = ArrayList()
-        val ref = FirebaseDatabase.getInstance("https://hopping-dc414-abaeb.firebaseio.com/").getReference()
-        ref.child(DateManager().getTodaysDateWithDashFormat()+"-Feed").addListenerForSingleValueEvent(object: ValueEventListener {
+        val ref = FirebaseDatabase.getInstance(resources.getString(R.string.feed_url)).getReference()
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }//end onCancelled
 
             override fun onDataChange(p0: DataSnapshot) {
-                for (child in p0.children) {
-                    val uploadTime = child.child("uploadTime").value
-                    val url = child.child("url").value
-                    val image = FeedImage(url as String, uploadTime as String)
-                    imagesArray.add(image)
+                imagesArray.removeAll(imagesArray)
+                for (child in p0.children){
+                    for (child1 in child.children) {
+                        val name = child1.child("placeName").value
+                        val url = child1.child("url").value
+                        val image = FeedImage(url as String, name as String)
+                        imagesArray.add(image)
+                    }
                 }
                 configureRecyclerView(imagesArray)
             }//end onDataChange

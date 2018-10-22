@@ -18,10 +18,15 @@ class FullScreenGallery : AppCompatActivity() {
 
         val numberOfImages = intent.getIntExtra(HorizontalGalleryRecyclerViewAdapter.NUMBER_OF_IMAGES, -1)
         val currentPosition = intent.getIntExtra(HorizontalGalleryRecyclerViewAdapter.CURRENT_POSITION, -1)
+        val imagesArray = intent.getStringArrayListExtra(HorizontalGalleryRecyclerViewAdapter.IMAGES_ARRAY)
 
         if (numberOfImages != -1) {
             for (i in 0..numberOfImages-1){
-                adapter.addFragments(FullScreenImage())
+                val bundle = Bundle()
+                bundle.putString(IMAGE_URL,imagesArray[i])
+                val fragment = FullScreenImage()
+                fragment.arguments = bundle
+                adapter.addFragments(fragment)
             }
         }
 
@@ -29,9 +34,11 @@ class FullScreenGallery : AppCompatActivity() {
 
         if (currentPosition != -1) {
             full_screen_view_pager.setCurrentItem(currentPosition,false)
-            toast("showing "+currentPosition+" image")
         }
 
     }//end onCreate
 
+    companion object {
+        val IMAGE_URL: String = "image_url"
+    }
 }//end class
