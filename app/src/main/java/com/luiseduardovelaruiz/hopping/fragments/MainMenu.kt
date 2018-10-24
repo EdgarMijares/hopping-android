@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.support.constraint.ConstraintLayout
 import android.support.constraint.ConstraintSet
 import android.support.v4.app.Fragment
@@ -40,6 +41,9 @@ class MainMenu : Fragment() {
     lateinit var rootConstraintLayout: ConstraintLayout
     lateinit var placesArray: List<Place>
 
+    lateinit var handler: Handler
+    lateinit var runnable: Runnable
+
     val myReceiver = object : BroadcastReceiver(){
         override fun onReceive(p0: Context?, p1: Intent?) {
             val gson = GsonBuilder().create()
@@ -58,6 +62,15 @@ class MainMenu : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         rootConstraintLayout = fragment_main_menu_layout
         LocalBroadcastManager.getInstance(activity!!.baseContext).registerReceiver(myReceiver, IntentFilter("data_fetch_intent"))
+        handler = Handler()
+        main_swipe_refresh_layout.setOnRefreshListener {
+            runnable = Runnable {
+                main_swipe_refresh_layout.setRefreshing(true)
+                onResume()
+                main_swipe_refresh_layout.setRefreshing(false)
+            }
+            handler.postDelayed(runnable, 2000)
+        }
     }//end onViewCreated
 
     fun displayMenu(placesCount: Int){
