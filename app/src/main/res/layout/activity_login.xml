@@ -17,7 +17,7 @@
     <com.facebook.login.widget.LoginButton
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
-        android:layout_height="43dp"
+        android:layout_height="60dp"
         android:layout_gravity="center_horizontal"
 
         app:layout_constraintBottom_toBottomOf="@+id/videoBackgroundView"
@@ -57,7 +57,6 @@
         android:background="@color/colorClear"
         android:text="Continuar como invitado"
         android:textColor="@color/gray"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/videoBackgroundView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

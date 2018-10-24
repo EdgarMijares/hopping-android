@@ -6,36 +6,40 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_login.*
 import android.media.MediaPlayer.OnPreparedListener
+import android.provider.BaseColumns._ID
 import android.util.Log
 import android.widget.Toast
 import com.facebook.*
 import com.facebook.login.LoginResult
+import org.jetbrains.anko.sdk25.coroutines.onClick
+import kotlin.math.log
 
 var myFaceBookData: String = ""
 
 class LogInActivity : AppCompatActivity() {
 
     private var callbackManager : CallbackManager? = null
+    private var menuIntent: Intent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme_SplashTheme)
         setContentView(R.layout.activity_login)
+        System.out.println("TOKEN: " + _ID)
 
-        var menuIntent: Intent = Intent(this@LogInActivity, MenuActivity::class.java)
+        menuIntent = Intent(this@LogInActivity, MenuActivity::class.java)
 
         // If the access token is available already assign it.
         var accessToken = AccessToken.getCurrentAccessToken()
 
         if (accessToken != null){
             Log.d("MY-TAG", "Log status "+accessToken.toString())
-            startActivity(menuIntent)
-            finish()
+            menuActivity()
         } else {
             Log.d("MY-TAG","Access token is null")
         }
 
-        var videoPath = parse("android.resource://"+packageName+"/"+ R.raw.background)
+        var videoPath = parse("android.resource://" + packageName + "/" + R.raw.background)
 
         videoBackgroundView.setVideoURI(videoPath)
         videoBackgroundView.start()
@@ -72,9 +76,22 @@ class LogInActivity : AppCompatActivity() {
                 Toast.makeText(this@LogInActivity, "onError", Toast.LENGTH_LONG).show()
             }
         })
+
+        guest_user_button.onClick {
+            menuActivity()
+        }
     }//end onCreate
 
     override fun onActivityResult(requestCode: Int, responseCode: Int, intent: Intent) {
         callbackManager!!.onActivityResult(requestCode, responseCode, intent)
+    }
+
+    fun menuActivity() {
+        if(menuIntent != null){
+            startActivity(menuIntent)
+            finish()
+        } else {
+            Log.d("SESSION", "No se pudo asignar menuInten")
+        }
     }
 }//end class LogInActivity
