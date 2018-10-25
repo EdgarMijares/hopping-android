@@ -69,14 +69,16 @@ class MenuActivity : AppCompatActivity() {
 
         val request = GraphRequest.newMeRequest(
                 AccessToken.getCurrentAccessToken()
-        ) { `object`, response ->
+            ) { `object`, response ->
             myFaceBookData = response.toString()
             var jsonObject = response.jsonObject
 
-            //GET FACEBOOK'S USER UNIQUE ID
-            if (jsonObject.has("id")) {
-                var id = jsonObject.getString("id")
-                facebookUserID = id
+            if(jsonObject != null){
+                //GET FACEBOOK'S USER UNIQUE ID
+                if (jsonObject.has("id")) {
+                    var id = jsonObject.getString("id")
+                    facebookUserID = id
+                }
             }
         }
 
@@ -123,34 +125,33 @@ class MenuActivity : AppCompatActivity() {
             })
         }//end onClick
 
-        activity_menu_camera_button.onClick {
-            // Open Built in Camera
-            /*
-            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivity(cameraIntent)
-            */
-
-            println("camera clicked")
-
-            /*
-             *  Android API Level checkout, camera2 API is only supported in Android 5 or newer
-             */
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-
-                    println("Camera 2 Intent will execute")
-
-                    val cameraIntent = Intent(this@MenuActivity, Camera::class.java)
-                    startActivity(cameraIntent)
-            } else {
-                //opcion para celulares con API level menor a 21 (android 5.0 Lollipop)
-            }
-
-        }//end onClick ...camera_button
+//        activity_menu_camera_button.onClick {
+//            // Open Built in Camera
+//            /*
+//            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+//            startActivity(cameraIntent)
+//            */
+//
+//            println("camera clicked")
+//
+//            /*
+//             *  Android API Level checkout, camera2 API is only supported in Android 5 or newer
+//             */
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//
+//                    println("Camera 2 Intent will execute")
+//
+//                    val cameraIntent = Intent(this@MenuActivity, Camera::class.java)
+//                    startActivity(cameraIntent)
+//            } else {
+//                //opcion para celulares con API level menor a 21 (android 5.0 Lollipop)
+//            }
+//
+//        }//end onClick ...camera_button
 
         fetchData()
 
         LocalBroadcastManager.getInstance(this).registerReceiver(buttonIconChangeReceiver, IntentFilter("menu_button_icon_change"))
-
 
     }//end onCreate
 

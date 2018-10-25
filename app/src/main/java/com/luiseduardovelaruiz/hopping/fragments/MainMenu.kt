@@ -33,9 +33,6 @@ import java.util.*
 
 var placesArrayG: ArrayList<Place> = ArrayList()
 
-/**
- *
- */
 class MainMenu : Fragment() {
 
     lateinit var rootConstraintLayout: ConstraintLayout

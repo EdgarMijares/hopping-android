@@ -27,7 +27,6 @@
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
-
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
@@ -44,7 +43,7 @@
         <!-- Log In Activity -->
         <activity
             android:name=".LogInActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <!-- Splash Activity -->
         <activity
@@ -60,13 +59,13 @@
         <!-- Menu activity (includes feed) -->
         <activity
             android:name=".MenuActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
 
         <!-- Place profile activity -->
         <activity
             android:name=".PlaceProfileActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustNothing"/>
+            android:windowSoftInputMode="adjustNothing" />
 
         <!-- Android Maps Key -->
         <meta-data
@@ -81,7 +80,8 @@
             android:required="false" />
 
         <activity android:name=".Camera" />
-        <activity android:name=".FullScreenGallery"></activity>
-
+        <activity android:name=".FullScreenGallery" />
+        <activity android:name=".Tutorial"></activity>
     </application>
+
 </manifest>

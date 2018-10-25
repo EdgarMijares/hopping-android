@@ -22,9 +22,11 @@ import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
 
 import com.facebook.login.LoginManager
+import com.luiseduardovelaruiz.hopping.MenuActivity
 import kotlinx.android.synthetic.main.activity_menu.*
 import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.support.v4.onUiThread
+import org.jetbrains.anko.support.v4.startActivity
 
 /**
  * A simple [Fragment] subclass.
@@ -61,20 +63,26 @@ class SideMenu : Fragment() {
             myFaceBookData = response.toString()
             var jsonObject = response.jsonObject
 
-            // GET FACEBOOK'S USER PROFILE IMAGE
-            if (jsonObject.has("picture")) {
-                var profilePictureURL = jsonObject.getJSONObject("picture").getJSONObject("data").getString("url")
-                onUiThread {
-                    Glide.with(this).load(profilePictureURL).into(profilePictureImageView)
+            if(jsonObject != null) {
+                // GET FACEBOOK'S USER PROFILE IMAGE
+                if (jsonObject.has("picture")) {
+                    var profilePictureURL = jsonObject.getJSONObject("picture").getJSONObject("data").getString("url")
+                    onUiThread {
+                        Glide.with(this).load(profilePictureURL).into(profilePictureImageView)
+                    }
                 }
-            }
 
-            //GET FACEBOOK'S USER UNIQUE ID
-            if (jsonObject.has("id")) {
-                var id = jsonObject.getString("id")
-                facebookUserID = id
+                //GET FACEBOOK'S USER UNIQUE ID
+                if (jsonObject.has("id")) {
+                    var id = jsonObject.getString("id")
+                    facebookUserID = id
+                }
+            } else {
+//                logInButton.visibility = View.VISIBLE
+                logOutButton.setText("INICIAR SESION")
             }
         }
+
         val parameters = Bundle()
         parameters.putString("fields", "id, name, link, picture.type(large)")
         request.parameters = parameters
@@ -112,7 +120,7 @@ class SideMenu : Fragment() {
             LoginManager.getInstance().logOut()
             var logInIntent: Intent = Intent(activity!!.baseContext, LogInActivity::class.java)
             startActivity(logInIntent)
-            activity!!.finish()
+//            activity!!.finish()
         }
 
 

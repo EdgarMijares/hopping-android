@@ -6,13 +6,15 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_login.*
 import android.media.MediaPlayer.OnPreparedListener
-import android.provider.BaseColumns._ID
 import android.util.Log
 import android.widget.Toast
 import com.facebook.*
 import com.facebook.login.LoginResult
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import kotlin.math.log
+import com.google.android.gms.tasks.OnCompleteListener
+
 
 var myFaceBookData: String = ""
 
@@ -21,19 +23,35 @@ class LogInActivity : AppCompatActivity() {
     private var callbackManager : CallbackManager? = null
     private var menuIntent: Intent? = null
 
+    private lateinit var auth: FirebaseAuth
+    private lateinit var user: FirebaseUser
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme_SplashTheme)
         setContentView(R.layout.activity_login)
-        System.out.println("TOKEN: " + _ID)
 
         menuIntent = Intent(this@LogInActivity, MenuActivity::class.java)
+
+        // CREAR USER INVITED TOKEN
+        auth = FirebaseAuth.getInstance()
+        user = auth.currentUser!!
+        user.getIdToken(true)
+            .addOnCompleteListener(
+                OnCompleteListener { task ->
+                    if(task.isSuccessful) {
+                        val idToken = task.getResult().getToken()
+                        Log.d("ID TOKEN", idToken)
+                    } else {
+                        Log.e("ID TOKEN", "Error en validacion de token")
+                    }
+                })
 
         // If the access token is available already assign it.
         var accessToken = AccessToken.getCurrentAccessToken()
 
         if (accessToken != null){
-            Log.d("MY-TAG", "Log status "+accessToken.toString())
+            Log.d("MY-TAG", "Log status " + accessToken.toString())
             menuActivity()
         } else {
             Log.d("MY-TAG","Access token is null")
@@ -94,4 +112,6 @@ class LogInActivity : AppCompatActivity() {
             Log.d("SESSION", "No se pudo asignar menuInten")
         }
     }
+
 }//end class LogInActivity
+

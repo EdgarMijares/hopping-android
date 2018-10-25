@@ -17,6 +17,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginStart="32dp"
+        android:layout_marginTop="5dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/logo_hopping"
         android:cropToPadding="false"
@@ -43,13 +44,13 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/myViewPager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainMenu_hoppingLogoImageView" >
+        app:layout_constraintTop_toBottomOf="@+id/mainMenu_hoppingLogoImageView">
 
     </android.support.v4.view.ViewPager>
 
@@ -62,6 +63,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/menu_bars_button"
         app:layout_constraintBottom_toTopOf="@+id/myViewPager"
         app:layout_constraintEnd_toStartOf="@+id/mainMenu_hoppingLogoImageView"
@@ -79,6 +81,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/search_button"
         app:layout_constraintBottom_toTopOf="@+id/myViewPager"
         app:layout_constraintEnd_toEndOf="parent"
@@ -93,24 +96,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.09" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.90" />
-
-    <ImageButton
-        android:id="@+id/activity_menu_camera_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/camara_button"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline3" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/menuPlacesFoundRV"
