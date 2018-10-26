@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.fragment_main_menu.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.onUiThread
+import org.jetbrains.anko.support.v4.swipeRefreshLayout
 import org.jetbrains.anko.support.v4.toast
 import java.util.*
 

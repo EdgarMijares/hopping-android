@@ -28,6 +28,8 @@ class LogInActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var user: FirebaseUser
 
+    private var flag: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setTheme(R.style.AppTheme_SplashTheme)
@@ -53,7 +55,7 @@ class LogInActivity : AppCompatActivity() {
         // If the access token is available already assign it.
         var accessToken = AccessToken.getCurrentAccessToken()
 
-        if (user != null) {
+        if (user != null && flag) {
             Log.d("LOGIN_TIPO", "Log status " + accessToken.toString())
             menuActivity()
         } else if (accessToken != null){
