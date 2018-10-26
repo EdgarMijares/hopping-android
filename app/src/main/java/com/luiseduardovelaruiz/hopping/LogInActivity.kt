@@ -14,6 +14,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FacebookAuthProvider
 
 
 var myFaceBookData: String = ""
@@ -36,25 +38,29 @@ class LogInActivity : AppCompatActivity() {
         // CREAR USER INVITED TOKEN
         auth = FirebaseAuth.getInstance()
         user = auth.currentUser!!
-        user.getIdToken(true)
-            .addOnCompleteListener(
-                OnCompleteListener { task ->
-                    if(task.isSuccessful) {
-                        val idToken = task.getResult().getToken()
-                        Log.d("ID TOKEN", idToken)
-                    } else {
-                        Log.e("ID TOKEN", "Error en validacion de token")
-                    }
-                })
+//        user.getIdToken(true)
+//            .addOnCompleteListener(
+//                OnCompleteListener { task ->
+//                    if(task.isSuccessful) {
+//                        val idToken = task.getResult().getToken()
+//                        Log.d("ID TOKEN", idToken)
+//                    } else {
+//                        Log.e("ID TOKEN", "Error en validacion de token")
+//                    }
+//                })
 
+        Log.d("FIREBASE", user.uid);
         // If the access token is available already assign it.
         var accessToken = AccessToken.getCurrentAccessToken()
 
-        if (accessToken != null){
-            Log.d("MY-TAG", "Log status " + accessToken.toString())
+        if (user != null) {
+            Log.d("LOGIN_TIPO", "Log status " + accessToken.toString())
+            menuActivity()
+        } else if (accessToken != null){
+            Log.d("LOGIN_TIPO", "Log status " + accessToken.toString())
             menuActivity()
         } else {
-            Log.d("MY-TAG","Access token is null")
+            Log.d("LOGIN_TIPO","Access token is null")
         }
 
         var videoPath = parse("android.resource://" + packageName + "/" + R.raw.background)
@@ -70,7 +76,6 @@ class LogInActivity : AppCompatActivity() {
         login_button.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
             override fun onSuccess(loginResult: LoginResult) {
                 accessToken = loginResult.accessToken
-
                 val request = GraphRequest.newMeRequest(
                         loginResult.accessToken
                 ) { `object`, response ->
@@ -81,6 +86,14 @@ class LogInActivity : AppCompatActivity() {
                 request.parameters = parameters
                 request.executeAsync()
                 startActivity(menuIntent)
+                val credential: AuthCredential = FacebookAuthProvider.getCredential(accessToken.token)
+                user.linkWithCredential(credential)
+                        .addOnCompleteListener { task ->
+                            if(task.isSuccessful) {
+                                Log.d("LINK_FIREBASE", "llinkWhitCredential:succes")
+                                val userLinked: FirebaseUser  = task.getResult().user
+                            }
+                        }
                 finish()
             }
 
@@ -96,7 +109,17 @@ class LogInActivity : AppCompatActivity() {
         })
 
         guest_user_button.onClick {
-            menuActivity()
+            auth.signInAnonymously().addOnCompleteListener { task ->
+                if(task.isSuccessful) {
+                    user = auth.currentUser!!
+                    Log.d("LOGIN_FIREBASE", "signInAnonymously:success")
+                    menuActivity()
+                } else {
+                    Log.w("LOGIN_FIREBASE", "signInAnonymously:failure", task.getException());
+                    Toast.makeText(this@LogInActivity, "No se pudo acceder como invitado intente mas tarde.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }//end onCreate
 

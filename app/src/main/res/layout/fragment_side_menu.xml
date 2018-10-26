@@ -66,6 +66,14 @@
                 android:background="@color/colorClear"
                 android:text="POLITICAS" />
 
+            <Button
+                android:id="@+id/tutorial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorClear"
+                android:textColor="@color/colorWhite"
+                android:text="AYUDA" />
+
             <!-- Log Out Facebook Button -->
             <Button
                 android:id="@+id/logOutButton"
@@ -75,14 +83,6 @@
                 android:textColor="@color/colorWhite"
                 android:text="CERRAR SESION" />
 
-            <!--<Button-->
-                <!--android:id="@+id/logInButton"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:background="@color/colorClear"-->
-                <!--android:textColor="@color/colorWhite"-->
-                <!--android:visibility="invisible"-->
-                <!--android:text="INICIAR SESION" />-->
         </LinearLayout>
     </RelativeLayout>
 

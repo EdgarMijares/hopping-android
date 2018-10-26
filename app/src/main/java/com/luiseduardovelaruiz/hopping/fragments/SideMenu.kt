@@ -12,17 +12,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.facebook.AccessToken
-import com.luiseduardovelaruiz.hopping.LogInActivity
 
-import com.luiseduardovelaruiz.hopping.R
-import com.luiseduardovelaruiz.hopping.myFaceBookData
 import com.facebook.GraphRequest
 import kotlinx.android.synthetic.main.fragment_side_menu.*
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
 
 import com.facebook.login.LoginManager
-import com.luiseduardovelaruiz.hopping.MenuActivity
+import com.luiseduardovelaruiz.hopping.*
 import kotlinx.android.synthetic.main.activity_menu.*
 import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.support.v4.onUiThread
@@ -114,6 +111,10 @@ class SideMenu : Fragment() {
             transaction.addToBackStack(null)
             sideMenuLayout.visibility = View.INVISIBLE
             transaction.commit()
+        }
+
+        tutorial.onClick {
+            startActivity(Intent(activity!!.baseContext, Tutorial::class.java))
         }
 
         logOutButton.onClick {

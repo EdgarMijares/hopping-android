@@ -155,6 +155,9 @@ class MainMenu : Fragment() {
                     val longitude = placesArray[index].longitude
 
                     button.layoutParams = buttonParams
+                    button.borderColor = Color.WHITE
+                    button.borderWidth = 5
+
                     onUiThread {
                         Glide.with(activity!!.baseContext).load(picURL).into(button)
                     }
