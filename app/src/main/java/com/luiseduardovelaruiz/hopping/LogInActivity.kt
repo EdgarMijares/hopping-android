@@ -26,7 +26,6 @@ class LogInActivity : AppCompatActivity() {
     private var menuIntent: Intent? = null
 
     private lateinit var auth: FirebaseAuth
-    private lateinit var user: FirebaseUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +36,9 @@ class LogInActivity : AppCompatActivity() {
 
         // CREAR USER INVITED TOKEN
         auth = FirebaseAuth.getInstance()
-        user = auth.currentUser!!
-//        user.getIdToken(true)
+
+        val user = auth.currentUser
+
 //            .addOnCompleteListener(
 //                OnCompleteListener { task ->
 //                    if(task.isSuccessful) {
@@ -49,14 +49,11 @@ class LogInActivity : AppCompatActivity() {
 //                    }
 //                })
 
-        Log.d("FIREBASE", user.uid);
+//        Log.d("FIREBASE", user.uid);
         // If the access token is available already assign it.
         var accessToken = AccessToken.getCurrentAccessToken()
 
-        if (user != null) {
-            Log.d("LOGIN_TIPO", "Log status " + accessToken.toString())
-            menuActivity()
-        } else if (accessToken != null){
+        if (accessToken != null){
             Log.d("LOGIN_TIPO", "Log status " + accessToken.toString())
             menuActivity()
         } else {
@@ -87,13 +84,15 @@ class LogInActivity : AppCompatActivity() {
                 request.executeAsync()
                 startActivity(menuIntent)
                 val credential: AuthCredential = FacebookAuthProvider.getCredential(accessToken.token)
-                user.linkWithCredential(credential)
-                        .addOnCompleteListener { task ->
-                            if(task.isSuccessful) {
-                                Log.d("LINK_FIREBASE", "llinkWhitCredential:succes")
-                                val userLinked: FirebaseUser  = task.getResult().user
+                if(user != null){
+                    user.linkWithCredential(credential)
+                            .addOnCompleteListener { task ->
+                                if(task.isSuccessful) {
+                                    Log.d("LINK_FIREBASE", "llinkWhitCredential:succes")
+                                    val userLinked: FirebaseUser  = task.getResult().user
+                                }
                             }
-                        }
+                }
                 finish()
             }
 
@@ -111,7 +110,6 @@ class LogInActivity : AppCompatActivity() {
         guest_user_button.onClick {
             auth.signInAnonymously().addOnCompleteListener { task ->
                 if(task.isSuccessful) {
-                    user = auth.currentUser!!
                     Log.d("LOGIN_FIREBASE", "signInAnonymously:success")
                     menuActivity()
                 } else {
@@ -132,7 +130,7 @@ class LogInActivity : AppCompatActivity() {
             startActivity(menuIntent)
             finish()
         } else {
-            Log.d("SESSION", "No se pudo asignar menuInten")
+            Log.d("SESSION", "No se pudo asignar menuIntem")
         }
     }
 
