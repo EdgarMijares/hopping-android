@@ -85,11 +85,6 @@
         <activity android:name=".FullScreenGallery" />
         <activity android:name=".Tutorial" />
 
-        <service android:name=".controllers.FirebaseService">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
         <service
             android:name=".controllers.FirebaseMessageService">
             <intent-filter>

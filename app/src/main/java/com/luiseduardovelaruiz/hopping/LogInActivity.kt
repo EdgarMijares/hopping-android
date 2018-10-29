@@ -10,11 +10,14 @@ import android.util.Log
 import android.widget.Toast
 import com.facebook.*
 import com.facebook.login.LoginResult
+import com.google.android.gms.tasks.OnSuccessListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import org.jetbrains.anko.sdk25.coroutines.onClick
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.iid.InstanceIdResult
 
 
 var myFaceBookData: String = ""
@@ -36,7 +39,11 @@ class LogInActivity : AppCompatActivity() {
         // CREAR USER INVITED TOKEN
         auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
-        Log.d("TOKEN", user!!.uid)
+
+        FirebaseInstanceId.getInstance().instanceId
+                .addOnSuccessListener(this@LogInActivity, OnSuccessListener { task ->
+                    Log.w("TokenFirebase", task.token)
+                })
 
         // If the access token is available already assign it.
         var accessToken = AccessToken.getCurrentAccessToken()
