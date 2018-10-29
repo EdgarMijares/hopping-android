@@ -23,13 +23,21 @@
           }
         },
         {
+          "client_id": "575574559197-kppg51d54kvt984cd2q14gekk8ij3u45.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.luiseduardovelaruiz.hopping",
+            "certificate_hash": "e8af1bd00b64b4cdf933350ae1fe7270ae3de181"
+          }
+        },
+        {
           "client_id": "575574559197-9suc9qvojb1oq15dl3d27c2pjqdb1iqn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCamEikXKKr9dScMumyj99k0zf9j9FeX9I"
+          "current_key": "AIzaSyBW--HTZX474srZA5J9LXdgCTJFzYzM2gQ"
         }
       ],
       "services": {
@@ -42,6 +50,13 @@
             {
               "client_id": "575574559197-9suc9qvojb1oq15dl3d27c2pjqdb1iqn.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "575574559197-noe0nb1kh5kllgmnuj9t3gumc2fjuaij.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.luisevr.Hopping"
+              }
             }
           ]
         },

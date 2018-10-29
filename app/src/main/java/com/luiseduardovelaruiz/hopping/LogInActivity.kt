@@ -36,6 +36,7 @@ class LogInActivity : AppCompatActivity() {
         // CREAR USER INVITED TOKEN
         auth = FirebaseAuth.getInstance()
         val user = auth.currentUser
+        Log.d("TOKEN", user!!.uid)
 
         // If the access token is available already assign it.
         var accessToken = AccessToken.getCurrentAccessToken()
@@ -76,7 +77,7 @@ class LogInActivity : AppCompatActivity() {
                             .addOnCompleteListener { task ->
                                 if(task.isSuccessful) {
                                     Log.d("LINK_FIREBASE", "llinkWhitCredential:succes")
-                                    val userLinked: FirebaseUser  = task.getResult().user
+//                                    val userLinked: FirebaseUser  = task.getResult().user
                                 }
                             }
                 }

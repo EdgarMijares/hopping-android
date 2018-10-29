@@ -14,12 +14,12 @@
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:largeHeap="true"
-        android:hardwareAccelerated="true"
         android:theme="@style/AppTheme.NoActionBar">
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -83,7 +83,19 @@
 
         <activity android:name=".Camera" />
         <activity android:name=".FullScreenGallery" />
-        <activity android:name=".Tutorial"></activity>
+        <activity android:name=".Tutorial" />
+
+        <service android:name=".controllers.FirebaseService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".controllers.FirebaseMessageService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
