@@ -95,15 +95,19 @@ class LogInActivity : AppCompatActivity() {
         })
 
         guest_user_button.onClick {
-            auth.signInAnonymously().addOnCompleteListener { task ->
-                if(task.isSuccessful) {
-                    Log.d("LOGIN_FIREBASE", "signInAnonymously:success")
-                    menuActivity()
-                } else {
-                    Log.w("LOGIN_FIREBASE", "signInAnonymously:failure", task.getException());
-                    Toast.makeText(this@LogInActivity, "No se pudo acceder como invitado intente mas tarde.",
-                            Toast.LENGTH_SHORT).show();
+            if(auth == null) {
+                auth.signInAnonymously().addOnCompleteListener { task ->
+                    if(task.isSuccessful) {
+                        Log.d("LOGIN_FIREBASE", "signInAnonymously:success")
+                        menuActivity()
+                    } else {
+                        Log.w("LOGIN_FIREBASE", "signInAnonymously:failure", task.getException());
+                        Toast.makeText(this@LogInActivity, "No se pudo acceder como invitado intente mas tarde.",
+                                Toast.LENGTH_SHORT).show();
+                    }
                 }
+            } else {
+                menuActivity()
             }
         }
     }//end onCreate
