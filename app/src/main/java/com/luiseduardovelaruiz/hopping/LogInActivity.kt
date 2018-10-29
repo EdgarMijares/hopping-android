@@ -13,7 +13,6 @@ import com.facebook.login.LoginResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import org.jetbrains.anko.sdk25.coroutines.onClick
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 
