@@ -36,20 +36,8 @@ class LogInActivity : AppCompatActivity() {
 
         // CREAR USER INVITED TOKEN
         auth = FirebaseAuth.getInstance()
-
         val user = auth.currentUser
 
-//            .addOnCompleteListener(
-//                OnCompleteListener { task ->
-//                    if(task.isSuccessful) {
-//                        val idToken = task.getResult().getToken()
-//                        Log.d("ID TOKEN", idToken)
-//                    } else {
-//                        Log.e("ID TOKEN", "Error en validacion de token")
-//                    }
-//                })
-
-//        Log.d("FIREBASE", user.uid);
         // If the access token is available already assign it.
         var accessToken = AccessToken.getCurrentAccessToken()
 
