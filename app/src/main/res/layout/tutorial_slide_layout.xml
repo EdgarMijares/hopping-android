@@ -3,13 +3,16 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo_minitutorial"
+    android:scaleType="centerCrop">
 
     <ImageView
-        android:id="@+id/image_background"
+        android:id="@+id/image_tutorial"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        app:srcCompat="@drawable/tutorial_uno" />
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/tuto_img_uno" />
+
 
 </android.support.constraint.ConstraintLayout>

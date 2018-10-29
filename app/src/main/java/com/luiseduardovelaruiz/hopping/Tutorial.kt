@@ -2,7 +2,7 @@ package com.luiseduardovelaruiz.hopping
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.luiseduardovelaruiz.hopping.controllers.SlideAdapterTotorial
+import com.luiseduardovelaruiz.hopping.adapters.SlideAdapterTotorial
 import kotlinx.android.synthetic.main.activity_tutorial.*
 
 class Tutorial : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.luiseduardovelaruiz.hopping.controllers
+package com.luiseduardovelaruiz.hopping.adapters
 
 import android.content.Context
 import android.os.Parcel
@@ -21,13 +21,13 @@ class SlideAdapterTotorial() : PagerAdapter(), Parcelable {
     }
 
     var slide_image: IntArray = intArrayOf(
-            R.drawable.tutorial_uno,
-            R.drawable.tutorial_dos,
-            R.drawable.tutorial_tres,
-            R.drawable.tutorial_cuatro,
-            R.drawable.tutorial_cinco,
-            R.drawable.tutorial_seis,
-            R.drawable.tutorial_siete
+            R.drawable.tuto_img_uno,
+            R.drawable.tuto_img_dos,
+            R.drawable.tuto_img_tres,
+            R.drawable.tuto_img_cuatro,
+            R.drawable.tuto_img_cinco,
+            R.drawable.tuto_img_seis,
+            R.drawable.tuto_img_siete
     )
 
     constructor(parcel: Parcel) : this() {
