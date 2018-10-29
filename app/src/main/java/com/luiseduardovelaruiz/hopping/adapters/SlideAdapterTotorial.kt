@@ -46,7 +46,7 @@ class SlideAdapterTotorial() : PagerAdapter(), Parcelable {
         this.layoutInflater = this.conext.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val view: View = this.layoutInflater!!.inflate(R.layout.tutorial_slide_layout, container, false)
 
-        val background:ImageView = view.findViewById(R.id.image_background)
+        val background:ImageView = view.findViewById(R.id.image_tutorial)
         background.setImageResource(slide_image.get(position))
 
         return view
