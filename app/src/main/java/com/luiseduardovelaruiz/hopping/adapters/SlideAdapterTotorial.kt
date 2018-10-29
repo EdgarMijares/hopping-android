@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.luiseduardovelaruiz.hopping.R
 
-class SlideAdapterTotorial() : PagerAdapter(), Parcelable {
+class SlideAdapterTotorial() : PagerAdapter() {
 
     private lateinit var conext: Context;
     private var layoutInflater: LayoutInflater? = null
@@ -50,27 +50,5 @@ class SlideAdapterTotorial() : PagerAdapter(), Parcelable {
         background.setImageResource(slide_image.get(position))
 
         return view
-    }
-
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        super.destroyItem(container, position, `object`)
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-        parcel.writeIntArray(slide_image)
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<SlideAdapterTotorial> {
-        override fun createFromParcel(parcel: Parcel): SlideAdapterTotorial {
-            return SlideAdapterTotorial(parcel)
-        }
-
-        override fun newArray(size: Int): Array<SlideAdapterTotorial?> {
-            return arrayOfNulls(size)
-        }
     }
 }
